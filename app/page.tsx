@@ -1,65 +1,127 @@
-import Image from "next/image";
 
-export default function Home() {
+import Header from '@/app/components/Header/Header';
+import Directory from '@/app/components/Directory/Directory';
+import PostList from '@/app/components/Posts/PostList';
+import SideMenu from '@/app/components/SideMenu/SideMenu';
+
+import DocumentsWidget from '@/app/components/Widgets/DocumentsWidget';
+import LocaleInfoWidget from '@/app/components/Widgets/LocaleInfoWidget';
+import FeaturedGalleryWidget from '@/app/components/Widgets/FeaturedGalleryWidget';
+import NoticesWidget from '@/app/components/Widgets/NoticesWidget';
+import ImageWidget from '@/app/components/Widgets/ImageWidget';
+import EventsWidget from '@/app/components/Widgets/EventsWidget';
+
+import Footer from '@/app/components/Footer/Footer';
+import BottomPanel from '@/app/components/Footer/BottomPanel';
+
+import { directoryItems } from '@/app/data/directory';
+import { posts } from '@/app/data/posts';
+import { documents } from '@/app/data/documents';
+import { localeInfo } from '@/app/data/locale';
+import { featuredGallery, footerLinks } from '@/app/data/footer';
+import { notices } from '@/app/data/notices';
+import { events } from '@/app/data/events';
+import type { NavItem } from '@/app/types';
+
+// Top header nav mirrors the left side-menu structure
+const headerNav: NavItem[] = [
+  {
+    label: 'Home',
+    href: '/index.html',
+    children: [
+      { label: 'Home 1', href: '/index.html' },
+      { label: 'Home 2', href: '/home-2.html' },
+    ],
+  },
+  {
+    label: 'Government',
+    href: '/town-hall.html',
+    children: [
+      { label: 'Town Hall', href: '/town-hall.html' },
+      { label: 'Town Council', href: '/town-council.html' },
+      { label: 'Phone Numbers', href: '/phone-numbers.html' },
+      { label: 'Documents', href: '/document-list.html' },
+      { label: 'Write To Mayor', href: '/contact.html' },
+    ],
+  },
+  {
+    label: 'Community',
+    href: '/post-list.html',
+    children: [
+      { label: 'News', href: '/post-list.html' },
+      { label: 'Notices', href: '/notice-list.html' },
+      { label: 'Events', href: '/event-list.html' },
+      { label: 'Galleries', href: '/gallery-list.html' },
+    ],
+  },
+  {
+    label: 'Pages',
+    href: '/statistics.html',
+    children: [
+      { label: 'Statistics', href: '/statistics.html' },
+      { label: 'Virtual Tour', href: '/virtual-tour.html' },
+      { label: 'Town History', href: '/town-history.html' },
+      { label: 'Elements', href: '/elements.html' },
+    ],
+  },
+];
+
+export default function Page() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Header
+        nav={headerNav}
+        imgSlides={['/images/header-01.jpg'/*, '/images/header-02.jpg'*/]}
+        gmapAddress="Main St, Stowe, VT 05672, USA"
+      />
+      <div id="core">
+        <div className="c-container">
+          <div className="row">
+            <div className="middle-column col-md-6 col-md-push-3">
+              <div id="page-header">
+                <div className="page-title">
+                  <h1>Welcome to TownPress,<br /><em>the Most Exciting Town of Northeast!</em></h1>
+                </div>
+              </div>
+              <div id="page-content">
+                <div className="page-content-inner">
+                  <Directory items={directoryItems} />
+                  <PostList posts={posts} />
+                </div>
+              </div>
+              <hr className="c-separator m-margin-top-small m-margin-bottom-small m-transparent hidden-lg hidden-md" />
+            </div>
+            <div className="left-column col-md-3 col-md-pull-6">
+              <SideMenu
+                items={[
+                  headerNav[0],
+                  headerNav[1],
+                  headerNav[2],
+                  headerNav[3],
+                ]}
+              />
+              <aside className="sidebar">
+                <div className="widget-list">
+                  <DocumentsWidget docs={documents} />
+                  <LocaleInfoWidget info={localeInfo} />
+                  <FeaturedGalleryWidget gallery={featuredGallery} />
+                </div>
+              </aside>
+            </div>
+            <div className="right-column col-md-3">
+              <aside className="sidebar">
+                <div className="widget-list">
+                  <NoticesWidget notices={notices} />
+                  <ImageWidget />
+                  <EventsWidget events={events} />
+                </div>
+              </aside>
+            </div>
+
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+      <Footer links={footerLinks} />
+    </>
   );
 }
