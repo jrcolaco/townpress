@@ -23,7 +23,7 @@
 	-------------------------------------------------------------------------- */
 
 	// MAIN PALETTE
-	$accent: #607D8B; // primary accent color
+	$accent: #2196F3; // primary accent color
 	$xx-soft-gray: #fcfcfc; // very very soft backgrounds
 	$x-soft-gray: #f0f0f0; // very soft backgrounds
 	$soft-gray: #e5e5e5; // soft background
@@ -39,11 +39,11 @@
 	$content-bg: #FFF;
 
 	// WIDGETS
-	$locale-info-widget-bg: '../../../images/locale-widget-bg.jpg';
+	$locale-info-widget-bg: '../../public/images/locale-widget-bg.jpg';
 
 	// FOOTER
 	$footer-bg: #111111;
-	$footer-bg-image: '../../../images/footer-bg.jpg';
+	$footer-bg-image: '../../public/images/footer-bg.jpg';
 
 	/* -------------------------------------------------------------------------
 		MIXINS

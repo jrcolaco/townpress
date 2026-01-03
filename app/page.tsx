@@ -12,7 +12,6 @@ import ImageWidget from '@/app/components/Widgets/ImageWidget';
 import EventsWidget from '@/app/components/Widgets/EventsWidget';
 
 import Footer from '@/app/components/Footer/Footer';
-import BottomPanel from '@/app/components/Footer/BottomPanel';
 
 import { directoryItems } from '@/app/data/directory';
 import { posts } from '@/app/data/posts';
@@ -23,7 +22,6 @@ import { notices } from '@/app/data/notices';
 import { events } from '@/app/data/events';
 import type { NavItem } from '@/app/types';
 
-// Top header nav mirrors the left side-menu structure
 const headerNav: NavItem[] = [
   {
     label: 'Home',
@@ -71,7 +69,7 @@ export default function Page() {
     <>
       <Header
         nav={headerNav}
-        imgSlides={['/images/header-01.jpg'/*, '/images/header-02.jpg'*/]}
+        imgSlides={['/images/header-01.jpg', '/images/header-02.jpg']}
         gmapAddress="Main St, Stowe, VT 05672, USA"
       />
       <div id="core">
